@@ -19,7 +19,20 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@authenticate');
+Route::get('products', 'ProductsController@index');
+Route::get('products/{products}', 'ProductsController@show');
+
+
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('customers/{customers}', 'CustomersController@show');
+    Route::post('customers', 'CustomersController@store');
+    Route::put('customers/{customers}', 'CustomersController@update');
+    Route::delete('customers/{customers}', 'CustomersController@delete');
+    Route::get('customers', 'CustomersController@index');
+    Route::put('products/{products}', 'ProductsController@update');
+    Route::post('products', 'ProductsController@store');
+    Route::delete('products/{products}', 'ProductsController@delete');
+
 });
